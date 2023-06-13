@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPFS Hash Generator</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/lodash"></script>
+    <script src="https://raw.githubusercontent.com/numpde/ipfs-for-text/main/deps/dist/hash.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    // React component
+    class IPFSHashGenerator extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                text: '',
+                ipfsHash: ''
+            };
+
+            // Debounce the computeHash function to not compute on every change
+            this.computeHash = _.debounce(this.computeHash, 1000);
+        }
+
+        handleTextChange = (event) => {
+            this.setState({text: event.target.value});
+            this.computeHash(event.target.value);
+        }
+
+        computeHash = async (text) => {
+            const hash = getHash.default;
+
+            this.setState({ipfsHash: hash(text)});
+        }
+
+        render() {
+            return (
+                <div>
+                    <textarea onChange={this.handleTextChange} value={this.state.text}></textarea>
+                    <p>IPFS Hash: {this.state.ipfsHash}</p>
+                </div>
+            );
+        }
+    }
+
+    // Render the component
+    ReactDOM.render(<IPFSHashGenerator/>, document.getElementById('root'));
+
+</script>
+
+</body>
+
+
+</html>
