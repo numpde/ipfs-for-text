@@ -2,6 +2,36 @@
 <html>
 <head>
     <title>IPFS Hash Generator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        #root {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1em;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1em;
+            border: 1px solid #ced4da;
+            border-radius: 0.25em;
+            font-size: 1em;
+        }
+
+        p {
+            font-size: 1em;
+            color: #212529;
+        }
+    </style>
 </head>
 <body>
 <div id="root"></div>
@@ -16,7 +46,7 @@
             };
 
             // Debounce the computeHash function to not compute on every change
-            this.computeHash = _.debounce(this.computeHash, 1000);
+            this.computeHash = _.debounce(this.computeHash, 300);
         }
 
         handleTextChange = (event) => {
