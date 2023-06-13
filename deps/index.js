@@ -15,4 +15,4 @@ async function getHash(text) {
     return cid.toV0().toString();
 }
 
-export {getHash};
+window.getHash = getHash;
